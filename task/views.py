@@ -1,9 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 from .forms import TaskForm
-from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth import login, logout
+from .models import Task
+from django.contrib.auth.decorators import login_required
+from datetime import date
 
 
 def normal_check(user):
@@ -12,10 +14,24 @@ def normal_check(user):
     else:
         return True
 
-# Create your views here.
-class Task(View):
 
-    @method_decorator(user_passes_test(normal_check, login_url='/user/login/'))
+class Task_Page(View):
+
+    @method_decorator(login_required)
     def get(self, request):
+        task_list = Task.objects.filter(user=request.user)
         task_form = TaskForm()
-        return render(request, 'task/home.html', {'task': task_form})
+        return render(request, 'task/home.html', {'task': task_form, 'list': task_list})
+
+    @method_decorator(login_required)
+    def post(self, request):
+        task_form = TaskForm(request.POST)
+        if task_form.is_valid():
+            cleaned_data = task_form.cleaned_data
+            task = Task(user=request.user, name=cleaned_data['name'], description=cleaned_data['description'],
+                        priority=cleaned_data['priority'], due_date=cleaned_data['due_date'])
+            task.save()
+            return HttpResponseRedirect('/task/home/')
+        else:
+            task_form = TaskForm(request.POST)
+            return render(request, 'task/home.html', {'task': task_form, 'error': 0})

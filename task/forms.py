@@ -1,11 +1,14 @@
 from django import forms
 from .models import Task
+from django.forms.widgets import Textarea, DateInput
 
 
-class TaskForm(forms.Form):
+class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['name', 'description', 'priority', 'due_date']
-
-    # def clean(self):
+        exclude = ['user', 'status', ]
+        widgets = {
+            'description': Textarea(),
+            'due_date': DateInput(),
+        }

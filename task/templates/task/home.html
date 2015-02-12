@@ -1,0 +1,81 @@
+{% extends 'authentication/base.html' %}
+
+{% block main %}
+    <div class="container" id="banner_list" >
+        <div class="page-header">
+            <div class="row">
+                <div class="panel panel-default" style="margin-top:30px;">
+                    <div class="panel-heading">Task List</div>
+                        <table class="table">
+                            <th>
+                                <td>Name</td>
+                                <td>Description</td>
+                                <td>Priority</td>
+                                <td>Due Date</td>
+                                <td>Status</td>
+                            </th>
+                            {% for i in list %}
+                            <tr class="{{i.status}}" id="{{i.id}}">
+                                <td></td>
+                                <td>{{i.name}}</td>
+                                <td>{{i.description}}</td>
+                                <td>{{i.priority}}</td>
+                                <td class="due_date">{{i.due_date}}</td>
+                                <td class="status">
+                                    {% if i.status == 0 %}
+                                        <select>
+                                            <option value="ToDo">ToDo</option>
+                                            <option value="Doing">Doing</option>
+                                            <option value="Done">Done</option>
+                                        </select>
+                                    {% elif i.status == 1 %}
+                                        <select>
+                                            <option value="Doing">Doing</option>
+                                            <option value="ToDo">ToDo</option>
+                                            <option value="Done">Done</option>
+                                        </select>
+                                    {% else %}
+                                            <option value="Done">Done</option>
+                                            <option value="Doing">Doing</option>
+                                            <option value="ToDo">ToDo</option>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="banner_add" style="display:none;">
+        <div class="page-header">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-3 col-sm-3 col-xs-2"></div>
+                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-8 input-group">
+                    <h3 class="text-center">Task</h3>
+                    <form class="lead" action="/task/home/" method="POST" style="font-size:15px;">
+                        {% csrf_token %}
+                        {% load bootstrap %}
+                        {{ task|bootstrap }}
+                        {% for i in form.errors %}
+                            {{i}}
+                        {% endfor %}
+                        {% if form.errors %}
+                            error!
+                        {% endif %}
+                        <br><br>
+                        <div class="center-block text-center">
+                        <input type="submit" value="Submit" class="btn btn-default"
+                               style="font-weight:bold; font-size:15px; margin-right:40px;">
+                        <input type="button" value="Cancel" id="cancel" class="btn btn-default"
+                               style="font-weight:bold; font-size:15px;">
+                        </div>
+                        </form>
+                </div>
+                <div class="col-lg-4 col-md-3 col-sm-3 col-xs-2" >
+            </div>
+        </div>
+    </div>
+{% endblock %}

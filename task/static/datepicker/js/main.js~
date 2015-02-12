@@ -1,0 +1,6 @@
+$(document).ready(function() {
+    // datepicker settings
+    $('#id_due_date').datepicker({
+        format: "yyyy-mm-dd",
+    });
+});
