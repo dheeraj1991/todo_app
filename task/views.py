@@ -43,8 +43,12 @@ def task_update(request):
         task_id = request.POST.get('id')
         task = Task.objects.get(pk=int(task_id))
         status = request.POST.get('status')
+        priority = request.POST.get('priority')
         if task.user == request.user:
-            task.status = status
+            if status:
+                task.status = status
+            if priority:
+                task.priority = priority
             task.save()
             return HttpResponse('updated')
 

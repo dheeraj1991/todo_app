@@ -109,6 +109,23 @@ $(document).ready(function() {
             });
     });
 
+    $('.priority').change(function(){
+      task_id = $(this).closest('tr').attr('id');;
+      console.log(task_id);
+      priority = $(this).val();
+      console.log(status);
+      $.ajax({
+                type:"POST",
+                url:"/task/update/",
+                data : { id : task_id , priority: priority},
+                traditional : true,
+                datatype : 'html',
+                success: function(){
+                    console.log('task updated');
+                }
+            });
+    });
+
     $('.delete').click(function(){
       task_id = $(this).closest('tr').attr('id');;
       console.log(task_id);
