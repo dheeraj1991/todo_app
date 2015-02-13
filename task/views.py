@@ -1,11 +1,10 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 from .forms import TaskForm
 from .models import Task
 from django.contrib.auth.decorators import login_required
-from datetime import date
 
 
 def normal_check(user):
@@ -33,5 +32,29 @@ class Task_Page(View):
             task.save()
             return HttpResponseRedirect('/task/home/')
         else:
+            task_list = Task.objects.filter(user=request.user)
             task_form = TaskForm(request.POST)
-            return render(request, 'task/home.html', {'task': task_form, 'error': 0})
+            return render(request, 'task/home.html', {'task': task_form, 'error': 0, 'list': task_list})
+
+
+@login_required
+def task_update(request):
+    if request.method == 'POST':
+        task_id = request.POST.get('id')
+        task = Task.objects.get(pk=int(task_id))
+        status = request.POST.get('status')
+        if task.user == request.user:
+            task.status = status
+            task.save()
+            return HttpResponse('updated')
+
+
+@login_required
+def task_delete(request):
+    if request.method == 'POST':
+        task_id = request.POST.get('id')
+        task = Task.objects.get(pk=int(task_id))
+        if task.user == request.user:
+            task.delete()
+            return HttpResponse('deleted')
+

@@ -1,7 +1,11 @@
 {% extends 'authentication/base.html' %}
 
 {% block main %}
+    {% if error == 0 %}
+    <div class="container" id="banner_list" style="display:none;">
+    {% else %}
     <div class="container" id="banner_list" >
+    {% endif %}
         <div class="page-header">
             <div class="row">
                 <div class="panel panel-default" style="margin-top:30px;">
@@ -21,24 +25,28 @@
                                 <td>{{i.description}}</td>
                                 <td>{{i.priority}}</td>
                                 <td class="due_date">{{i.due_date}}</td>
-                                <td class="status">
+                                <td>
+                                        <select class="status">
                                     {% if i.status == 0 %}
-                                        <select>
-                                            <option value="ToDo">ToDo</option>
-                                            <option value="Doing">Doing</option>
-                                            <option value="Done">Done</option>
-                                        </select>
+                                            <option value="0">ToDo</option>
+                                            <option value="1">Doing</option>
+                                            <option value="2">Done</option>
                                     {% elif i.status == 1 %}
-                                        <select>
-                                            <option value="Doing">Doing</option>
-                                            <option value="ToDo">ToDo</option>
-                                            <option value="Done">Done</option>
-                                        </select>
+                                            <option value="1">Doing</option>
+                                            <option value="0">ToDo</option>
+                                            <option value="2">Done</option>
                                     {% else %}
-                                            <option value="Done">Done</option>
-                                            <option value="Doing">Doing</option>
-                                            <option value="ToDo">ToDo</option>
+                                            <option value="2">Done</option>
+                                            <option value="1">Doing</option>
+                                            <option value="0">ToDo</option>
                                     {% endif %}
+                                        </select>
+                                </td>
+                                <td>
+                                    <button class="glyphicon glyphicon-pencil edit" title="Edit" style="margin-right:20px;">
+                                    </button>
+                                    <button class="glyphicon glyphicon-minus delete" title="Delete" style="margin-right:-20px;">
+                                    </button>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -48,7 +56,11 @@
             </div>
         </div>
     </div>
+    {% if error == 0 %}
+    <div class="container" id="banner_add">
+    {% else %}
     <div class="container" id="banner_add" style="display:none;">
+    {% endif %}
         <div class="page-header">
             <div class="row">
 
@@ -63,7 +75,7 @@
                             {{i}}
                         {% endfor %}
                         {% if form.errors %}
-                            error!
+                            <p id="error">error!</p>
                         {% endif %}
                         <br><br>
                         <div class="center-block text-center">
@@ -72,7 +84,7 @@
                         <input type="button" value="Cancel" id="cancel" class="btn btn-default"
                                style="font-weight:bold; font-size:15px;">
                         </div>
-                        </form>
+                    </form>
                 </div>
                 <div class="col-lg-4 col-md-3 col-sm-3 col-xs-2" >
             </div>
