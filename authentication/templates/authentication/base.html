@@ -1,15 +1,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/datepicker/css/bootstrap.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/datepicker/css/datepicker3.css">
+    <link rel="stylesheet" href="/static/bootstrap_theme.css">
     <link rel="stylesheet" href="/static/datepicker/css/main.css">
 
-    <!--&lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
-    <link rel="stylesheet" href="/static/bootstrap_theme.css">
-
 </head>
-<body>
+<body background="/static/datepicker/images/grey_sandbag.png">
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -21,8 +20,10 @@
             <div id="navbar-main" class="navbar-collapse collapse">
                 {% if user and not user.is_anonymous %}
                 <ul class="nav navbar-nav navbar-right">
+                    <li> <a href="/task/home/"> Home </a></li>
                     <li> <button id="add_task"
-                                 style="margin-top:18px; color:white; background-color:transparent; border:none;">
+                                 style="margin-top:18px; color:#686868; background-color:transparent; border:none;
+                                 font-size:14px;">
                         Add Task </button></li>
                     <li> <a href="#"> Hi {{ user }} </a></li>
                     <li> <a href="/user/user_logout/"> Logout </a></li>

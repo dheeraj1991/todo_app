@@ -1,2 +1,4 @@
 *.pyc
 staticfiles
+
+task/static/datepicker/images/grey_sandbag.png

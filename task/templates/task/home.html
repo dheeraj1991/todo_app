@@ -8,7 +8,7 @@
     {% endif %}
         <div class="page-header">
             <div class="row">
-                <div class="panel panel-default" style="margin-top:30px;">
+                <div class="panel panel-default" style="margin-top:50px;">
                     <div class="panel-heading">Task List
                         <span class="spacing" >All</span> <span>  | </span>
                         <span  class="spacing" >Day</span> <span> | </span>
@@ -58,7 +58,7 @@
             </div>
         </div>
     </div>
-    <div class="footer container">
+    <div class="container footer">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <label>Opted Colors</label> :
@@ -73,37 +73,28 @@
     </div>
 
     {% if error == 0 %}
-    <div class="container" id="banner_add">
+    <div class="container" id="banner_add"
+         style="margin-top:10%; background-image: url(../static/images/ajax-loader.gif);">
     {% else %}
-    <div class="container" id="banner_add" style="display:none;">
+    <div class="container" id="banner_add"
+         style="display:none; margin-top:10%; background-image: url(../static/images/ajax-loader.gif);">
     {% endif %}
-        <div class="page-header">
-            <div class="row">
-
-                <div class="col-lg-4 col-md-3 col-sm-3 col-xs-2"></div>
-                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-8 input-group">
-                    <h3 class="text-center">Task</h3>
-                    <form class="lead" action="/task/home/" method="POST" style="font-size:15px;">
+            <div class="row text-center" >
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-1"></div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10" style="background:rgba(0,0,0,0.5);">
+                    {% load bootstrap3 %}
+                    <form class="bs-example bs-example-form" action="/task/home/" method="post">
                         {% csrf_token %}
-                        {% load bootstrap %}
-                        {{ task|bootstrap }}
-                        {% for i in form.errors %}
-                            {{i}}
-                        {% endfor %}
-                        {% if form.errors %}
-                            <p id="error">error!</p>
-                        {% endif %}
-                        <br><br>
-                        <div class="center-block text-center">
-                        <input type="submit" value="Submit" class="btn btn-default"
-                               style="font-weight:bold; font-size:15px; margin-right:40px;">
-                        <input type="button" value="Cancel" id="cancel" class="btn btn-default"
-                               style="font-weight:bold; font-size:15px;">
+                        <div class="page-header">
+                        <h1 style="color:white;">Add Task</h1>
                         </div>
+                        {% bootstrap_form task %}
+                        {% buttons %}
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        {% endbuttons %}
                     </form>
                 </div>
-                <div class="col-lg-4 col-md-3 col-sm-3 col-xs-2" >
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-1"></div>
             </div>
         </div>
-    </div>
 {% endblock %}

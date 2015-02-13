@@ -35,9 +35,11 @@ class SignUp(View):
     def post(self, request):
         signup_form = SignUpForm(request.POST)
         if signup_form.is_valid():
-            signup_form.save()
-            login_form = LoginForm()
-            return render(request, 'authentication/login.html', {'login': login_form})
+            # user = signup_form.save()
+            user = signup_form.cleaned_data
+            login(request, user)
+            # login_form = LoginForm()
+            return HttpResponseRedirect('/task/home/')
         else:
             signup_form = SignUpForm(request.POST)
             return render(request, 'authentication/signup.html', {'signup': signup_form})

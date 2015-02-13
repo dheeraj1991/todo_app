@@ -9,6 +9,6 @@ class TaskForm(forms.ModelForm):
         model = Task
         exclude = ['user', 'status', ]
         widgets = {
-            'description': Textarea(),
+            'description': Textarea(attrs={'style': 'height: 60px;'}),
             'due_date': DateInput(),
         }

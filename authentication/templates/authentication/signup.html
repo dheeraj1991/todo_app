@@ -1,29 +1,23 @@
 {% extends 'authentication/base.html' %}
 
 {% block main %}
-    <div class="container">
-        <div id="banner" class="page-header">
-            <div class="row">
-
-                <div class="col-lg-4 col-md-3 col-sm-3 col-xs-2"></div>
-                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-8 input-group">
-                    <h3 class="text-center" >Sign Up</h3>
-                    <form class="lead" action="/user/signup/" method="POST" style="font-size:15px;">
+        <div class="container todo-form" >
+            <div class="row text-center" >
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-1"></div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10 form-background" >
+                    {% load bootstrap3 %}
+                    <form class="bs-example bs-example-form" action="/user/signup/" method="post">
                         {% csrf_token %}
-                        {% load bootstrap %}
-                        {{ signup|bootstrap }}
-                        {% for i in form.errors %}
-                            {{i}}
-                        {% endfor %}
-                        {% if form.errors %}
-                            error!
-                        {% endif %}
-                        <input type="submit" value="Submit" class="btn btn-default center-block"
-                               style="font-weight:bold; font-size:15px;">
-                        </form>
+                        <div class="page-header">
+                        <h1 style="color:white;">Signup</h1>
+                        </div>
+                        {% bootstrap_form signup %}
+                        {% buttons %}
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        {% endbuttons %}
+                    </form>
                 </div>
-                <div class="col-lg-4 col-md-3 col-sm-3 col-xs-2" >
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-1"></div>
             </div>
         </div>
-    </div>
 {% endblock %}
