@@ -111,8 +111,6 @@ body {
 .footer {
     background-color: #b0c4de;
     float:bottom;
-    position:absolute;
-    bottom:5px;
     height: 50px;
     padding: 15px;
     border-top: 1px solid #dddddd;
@@ -156,5 +154,5 @@ body {
 
 .right_footer{
     float:right;
-    margin-right:50px;
+    margin-right:10px;
 }
