@@ -20,6 +20,10 @@ def user_logout(request):
     return HttpResponseRedirect('/user/login/')
 
 
+def home(request):
+    return HttpResponseRedirect('/user/signup/')
+
+
 class SignUp(View):
 
     @method_decorator(redirect)

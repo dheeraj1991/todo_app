@@ -85,6 +85,30 @@ $(document).ready(function() {
             });
     });
 
+    $('.status').change(function(){
+      task_id = $(this).closest('tr').attr('id');;
+      console.log(task_id);
+      status = $(this).val();
+      console.log(status);
+      $.ajax({
+                type:"POST",
+                url:"/task/update/",
+                data : { id : task_id , status: status},
+                traditional : true,
+                datatype : 'html',
+                success: function(){
+                    if(status == 0)
+                      $('#'+task_id).attr('bgcolor', '#CCFF99');
+                    else if (status == 1)
+                      $('#'+task_id).attr('bgcolor', '#FFFF66');
+                    else
+                      $('#'+task_id).attr('bgcolor', '#99FFCC');
+                    $('#'+task_id).attr('class', status);
+                    console.log('task updated');
+                }
+            });
+    });
+
     $('.delete').click(function(){
       task_id = $(this).closest('tr').attr('id');;
       console.log(task_id);

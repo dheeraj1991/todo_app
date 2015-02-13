@@ -5,4 +5,5 @@ urlpatterns = patterns('',
     url(r'^user/', include('authentication.urls', namespace='user')),
     url(r'^task/', include('task.urls', namespace='tasks')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^', 'authentication.views.home', name='home'),
 )
