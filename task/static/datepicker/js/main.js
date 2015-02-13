@@ -179,6 +179,15 @@ $(document).ready(function() {
             });
     });
 
+    $('.spacing').mouseover(function() {
+      console.log('hiii');
+      $(this).css('color','blue');
+    });
+
+    $('.spacing').mouseout(function() {
+      $(this).css('color','black');
+    });
+
     $('.spacing').click(function() {
       var time = $(this).text()
       console.log(time);
