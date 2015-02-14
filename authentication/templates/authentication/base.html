@@ -15,16 +15,13 @@
                 <a class="navbar-brand" href="#">
                     ToDo App
                 </a>
-                <a class="nav navbar-nav navbar-brand"> Developed by Dheeraj Prasanth </a>
+                <!--<a class="nav navbar-nav navbar-brand"> Developed by Dheeraj Prasanth </a>-->
             </div>
             <div id="navbar-main" class="navbar-collapse collapse">
                 {% if user and not user.is_anonymous %}
                 <ul class="nav navbar-nav navbar-right">
                     <li> <a href="/task/home/"> Home </a></li>
-                    <li> <button id="add_task"
-                                 style="margin-top:18px; color:#686868; background-color:transparent; border:none;
-                                 font-size:14px;">
-                        Add Task </button></li>
+                    <li>  <a href="/task/home/?task_add=1"> Add Task </a></li>
                     <li> <a href="#"> Hi {{ user }} </a></li>
                     <li> <a href="/user/user_logout/"> Logout </a></li>
                 </ul>
@@ -39,6 +36,16 @@
         </div>
     </div>
     {% block main %}{% endblock %}
+    <div class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container">
+          <ul class="nav navbar-nav navbar-left">
+              <li><a href="#">© 2015. All Rights <Reserved></Reserved></a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              <li> <a href="http://about.me/dheeraj_prasanth"> Developed By Dheeraj Prasanth </a></li>
+          </ul>
+      </div>
+    </div>
 <script src="/static/datepicker/js/jquery.min.js"></script>
 <script src="/static/datepicker/js/bootstrap.min.js"></script>
 <script src="/static/datepicker/js/bootstrap-datepicker.js"></script>

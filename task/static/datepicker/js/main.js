@@ -14,7 +14,7 @@ var day = newYear.getDay() - dowOffset; //the day of week the year begins on
 day = (day >= 0 ? day : day + 7);
 var daynum = Math.floor((this.getTime() - newYear.getTime() -
 (this.getTimezoneOffset()-newYear.getTimezoneOffset())*60000)/86400000) + 1;
-var weeknum;
+var weeknum;  
 //if the year starts before the middle of a week
 if(day < 4) {
 weeknum = Math.floor((daynum+day-1)/7) + 1;
@@ -34,6 +34,27 @@ return weeknum;
 };
 
 
+function sortTable(){
+  var rows = $('#task-table tbody  tr').get();
+
+  rows.sort(function(a, b) {
+
+  var A = $(a).find('.priority').val();
+  var B = $(b).find('.priority').val();
+
+  if(A < B) {
+    return -1*1;
+  }
+  if(A > B) {
+    return 1*1;
+  }
+  return 0;
+  });
+
+  $.each(rows, function(index, row) {
+    $('#task-table').children('tbody').append(row);
+  });
+}
 
 $(document).ready(function() {
   $.ajaxSetup({
@@ -159,6 +180,7 @@ $(document).ready(function() {
                 datatype : 'html',
                 success: function(){
                     console.log('task updated');
+                    sortTable();
                 }
             });
     });
@@ -180,7 +202,6 @@ $(document).ready(function() {
     });
 
     $('.spacing').mouseover(function() {
-      console.log('hiii');
       $(this).css('color','blue');
     });
 
@@ -243,4 +264,8 @@ $(document).ready(function() {
         }
       });
     });
+
+//  Sort by Priority in table
+    sortTable();
+
 });

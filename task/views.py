@@ -18,9 +18,12 @@ class Task_Page(View):
 
     @method_decorator(login_required)
     def get(self, request):
+        error = 1
+        if request.GET.get('task_add'):
+            error = 0
         task_list = Task.objects.filter(user=request.user)
         task_form = TaskForm()
-        return render(request, 'task/home.html', {'task': task_form, 'list': task_list})
+        return render(request, 'task/home.html', {'task': task_form, 'list': task_list, 'error': error})
 
     @method_decorator(login_required)
     def post(self, request):

@@ -107,16 +107,7 @@ body {
          -o-box-shadow: 0 0 10px #cccccc;
             box-shadow: 0 0 10px #cccccc;
 }
-/
-.footer {
-    background-color: #b0c4de;
-    float:bottom;
-    position:fixed;
-    margin-top:500px;
-    height: 50px;
-    padding: 15px;
-    border-top: 1px solid #dddddd;
-}
+
 
 .rectangle_todo{
     margin-left:10px;
@@ -174,11 +165,19 @@ body {
     margin-top:10%;
 }
 
+.todo-form-task{
+    margin-top:5%;
+}
+
 .form-background{
-    background:rgba(0,0,0,0.5);
+    background:rgba(0,0,0,0.3);
     border-radius:10px;
 }
 
 textarea{
     height:50px;
+}
+
+.navbar-fixed-bottom{
+    height:10px;
 }

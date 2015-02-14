@@ -15,17 +15,16 @@
                         <span  class="spacing" >Week</span> <span> | </span>
                         <span  class="spacing" >Month</span>
                     </div>
-                        <table class="table">
-                            <th>
-                                <td>Name</td>
-                                <td>Description</td>
-                                <td>Priority</td>
-                                <td>Due Date</td>
-                                <td>Status</td>
-                            </th>
+                        <table class="table" id="task-table">
+                            <tr>
+                                <th id="task_name">Name</th>
+                                <th id="task_desc">Description</th>
+                                <th id="task_prio">Priority</th>
+                                <th id="task_date">Due Date</th>
+                                <th id="task_status">Status</th>
+                            </tr>
                             {% for i in list %}
                             <tr class="{{i.status}}" id="{{i.id}}">
-                                <td></td>
                                 <td>{{i.name}}</td>
                                 <td>{{i.description}}</td>
                                 <td>
@@ -53,40 +52,34 @@
                             </tr>
                             {% endfor %}
                         </table>
+                    <div class="panel-footer" style="padding-top:15px;">
+                            <label>Opted Colors</label> :
+                            <span class="rectangle_todo"> ToDo </span>
+                            <span class="rectangle_doing"> Doing </span>
+                            <span class="rectangle_done"> Done </span>
+                            <span class="rectangle_over_due"> Over Due </span>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container footer">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <label>Opted Colors</label> :
-                <span class="rectangle_todo"> ToDo </span>
-                <span class="rectangle_doing"> Doing </span>
-                <span class="rectangle_done"> Done </span>
-                <span class="rectangle_over_due"> Over Due </span>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            </div>
-        </div>
-    </div>
 
     {% if error == 0 %}
-    <div class="container" id="banner_add"
-         style="margin-top:10%; background-image: url(../static/images/ajax-loader.gif);">
+    <div class="container todo-form-task" id="banner_add"
+         style="top:10%;">
     {% else %}
-    <div class="container" id="banner_add"
-         style="display:none; margin-top:10%; background-image: url(../static/images/ajax-loader.gif);">
+    <div class="container todo-form=task" id="banner_add"
+         style="display:none;">
     {% endif %}
             <div class="row text-center" >
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-1"></div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10" style="background:rgba(0,0,0,0.5);">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10 form-background">
                     {% load bootstrap3 %}
                     <form class="bs-example bs-example-form" action="/task/home/" method="post">
                         {% csrf_token %}
-                        <div class="page-header">
-                        <h1 style="color:white;">Add Task</h1>
+                        <div class="page-header" style="margin-top:5px;">
+                        <h3 style="color:white;">Add Task</h3>
                         </div>
                         {% bootstrap_form task %}
                         {% buttons %}
