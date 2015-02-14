@@ -19,5 +19,15 @@ Technologies:
 - Hosted on Heroku
 
 Screenshots:
+SignUp
+![SignUp](http://i.imgur.com/IQAvQ8c.png)
+
+Login
+![Login](http://i.imgur.com/9nYaVTx.png)
+
 Add Task
-![Add Task](https://www.dropbox.com/s/124gb4zvfh915uy/add-task.png)
+![Add Task] (http://i.imgur.com/BOO039R.png)
+
+Home
+![Home] (http://i.imgur.com/gOHPMBW.png)
+
