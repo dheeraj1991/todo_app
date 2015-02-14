@@ -13,9 +13,11 @@ The fields which define a task are as follows:
 - due_date :  Due Date of the task
 - user : The user who is associated to the task
 
-Technoglogies:
+Technologies:
 - Django, PostGres Database
 - Bootstrap and Jquery
 - Hosted on Heroku
 
-
+Screenshots:
+Add Task
+![Add Task](https://www.dropbox.com/s/124gb4zvfh915uy/add-task.png)

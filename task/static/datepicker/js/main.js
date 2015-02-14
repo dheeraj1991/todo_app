@@ -212,6 +212,10 @@ $(document).ready(function() {
     $('.spacing').click(function() {
       var time = $(this).text()
       console.log(time);
+      $('.spacing').each(function(index, val) {
+        $(this).css('textDecoration', 'none');
+      });
+      $(this).css('textDecoration', 'underline');
       $('.due_date').each(function(index, val){
         var str = $(this).text();
         var due = Date.parse(str);
