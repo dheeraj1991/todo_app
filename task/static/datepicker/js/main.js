@@ -56,6 +56,28 @@ function sortTable(){
   });
 }
 
+function dueDate(){
+      $('.due_date').each(function(index, val) {
+        var str = $(this).text();
+        var due = Date.parse(str);
+        var today = Date.parse('today');
+        console.log(due);
+        if (due.getFullYear() < today.getFullYear()){
+          $(this).closest('tr').attr('bgcolor', '#FF5959');
+        }
+        else if(due.getFullYear() == today.getFullYear()){
+          if (due.getMonth() < today.getMonth()){
+            $(this).closest('tr').attr('bgcolor', '#FF5959');
+          }
+          else if(due.getMonth() == today.getMonth()){
+            if (due.getDate() < today.getDate()){
+              $(this).closest('tr').attr('bgcolor', '#FF5959');
+            }
+          }
+        }
+    });
+}
+
 $(document).ready(function() {
   $.ajaxSetup({
              beforeSend: function(xhr, settings) {
@@ -99,25 +121,8 @@ $(document).ready(function() {
       $('#banner_add').css('display','none');
     });
 
-    $('.due_date').each(function(index, val) {
-        var str = $(this).text();
-        var due = Date.parse(str);
-        var today = Date.parse('today');
-        console.log(due);
-        if (due.getFullYear() < today.getFullYear()){
-          $(this).closest('tr').attr('bgcolor', '#FF5959');
-        }
-        else if(due.getFullYear() == today.getFullYear()){
-          if (due.getMonth() < today.getMonth()){
-            $(this).closest('tr').attr('bgcolor', '#FF5959');
-          }
-          else if(due.getMonth() == today.getMonth()){
-            if (due.getDate() < today.getDate()){
-              $(this).closest('tr').attr('bgcolor', '#FF5959');
-            }
-          }
-        }
-    });
+//  Due Date Check
+    dueDate();
 
     $('.status').change(function(){
       task_id = $(this).closest('tr').attr('id');;
@@ -131,30 +136,7 @@ $(document).ready(function() {
                 traditional : true,
                 datatype : 'html',
                 success: function(){
-                    if(status == 0)
-                      $('#'+task_id).attr('bgcolor', '#CCFF99');
-                    else if (status == 1)
-                      $('#'+task_id).attr('bgcolor', '#FFFF66');
-                    else
-                      $('#'+task_id).attr('bgcolor', '#99FFCC');
-                    $('#'+task_id).attr('class', status);
-                    console.log('task updated');
-                }
-            });
-    });
 
-    $('.status').change(function(){
-      task_id = $(this).closest('tr').attr('id');;
-      console.log(task_id);
-      status = $(this).val();
-      console.log(status);
-      $.ajax({
-                type:"POST",
-                url:"/task/update/",
-                data : { id : task_id , status: status},
-                traditional : true,
-                datatype : 'html',
-                success: function(){
                     if(status == 0)
                       $('#'+task_id).attr('bgcolor', '#CCFF99');
                     else if (status == 1)
@@ -162,6 +144,7 @@ $(document).ready(function() {
                     else
                       $('#'+task_id).attr('bgcolor', '#99FFCC');
                     $('#'+task_id).attr('class', status);
+                    dueDate();
                     console.log('task updated');
                 }
             });
